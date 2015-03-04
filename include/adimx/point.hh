@@ -13,7 +13,7 @@ namespace adimx
 	 *                               Point object                               *
 	 ****************************************************************************/
 	template <typename T, std::size_t N>
-	class Point : public std::array<T, N>
+	class Point : public std::array<T,N>
 	{
 		public:
 			using container  = std::array<T,N>;
@@ -21,20 +21,11 @@ namespace adimx
 
 		public:
 			// ---------------------------- Constructors -----------------------------
-			Point(Point&)										= default;
-			Point(const Point&)							= default;
-			Point(Point&&)									= default;
-			Point& operator=(const Point&)	= default;
-
-			Point(T v)
-			{
-				for (size_t i=0; i<N; ++i) operator[](i) = v;
-			}
-
-			template<typename ...Args>
-			Point(Args&&... args) : std::array<T,N>{{args...}}
-    	{
-    	}
+			Point() = default;
+			Point(T v);
+			Point(const std::array<T,N>&);
+			template <typename U, std::size_t M>
+			Point(const Point<U,M>&);
 			
 			// ------------------------------- ACCESS --------------------------------
 			T&          x()                        { static_assert(N>0, "x() required N >= 1"); return operator[](0); }
@@ -57,8 +48,6 @@ namespace adimx
 			T infnorm() const;
 
 			// ------------------------------- STATIC --------------------------------
-			template <typename U, std::size_t M>
-			static Point resize			(const Point<U,M>&);
 			static Point min        (const Point&, const Point&);
 			static Point max        (const Point&, const Point&);
 

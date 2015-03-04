@@ -3,6 +3,25 @@
 /******************************************************************************
  *                          C O N S T R U C T O R S                           *
  ******************************************************************************/
+template <typename T, std::size_t N>
+adimx::Point<T,N>::Point(T v)
+{
+	for (size_t i=0; i<N; ++i) operator[](i) = v;
+}
+
+template <typename T, std::size_t N>
+adimx::Point<T,N>::Point(const std::array<T,N>& cpy) :
+	std::array<T,N>(cpy)
+{
+}
+
+template <typename T, std::size_t N>
+template <typename U, std::size_t M>
+adimx::Point<T,N>::Point(const Point<U,M>& p)
+{
+	for (size_t i=0; i<std::min(N, M); ++i) operator[](i) = p[i];
+	for (size_t i=M; i<N;              ++i) operator[](i) = value_type();
+}
 
 /******************************************************************************
  *                               M E T R I C S                                *
@@ -49,16 +68,6 @@ T adimx::Point<T,N>::infnorm() const
 /******************************************************************************
  *                        S T A T I C   M E T H O D S                         *
  ******************************************************************************/
-template <typename T, std::size_t N>
-template <typename U, std::size_t M>
-adimx::Point<T,N> adimx::Point<T,N>::resize(const adimx::Point<U,M>& p)
-{
-	adimx::Point<T,N> r;
-	for (size_t i=0; i<std::min(N, M); ++i) r[i] = p[i];
-	for (size_t i=M; i<N;              ++i) r[i] = value_type();
-	return r;
-}
-
 template <typename T, std::size_t N>
 adimx::Point<T,N> adimx::Point<T,N>::min(const adimx::Point<T,N>& p1, const adimx::Point<T,N>& p2)
 {
