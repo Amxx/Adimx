@@ -1,7 +1,5 @@
-#ifndef GEOMETRY_POINT_HH
-#define GEOMETRY_POINT_HH
-
-#include <cmath>
+#ifndef ADIMX__POINT__HH
+#define ADIMX__POINT__HH
 
 #include <array>
 #include <utility>
@@ -23,16 +21,21 @@ namespace adimx
 
 		public:
 			// ---------------------------- Constructors -----------------------------
-			Point() = default;
-			
-			Point(T v);
-			
+			Point(Point&)										= default;
+			Point(const Point&)							= default;
+			Point(Point&&)									= default;
+			Point& operator=(const Point&)	= default;
+
+			Point(T v)
+			{
+				for (size_t i=0; i<N; ++i) operator[](i) = v;
+			}
+
 			template<typename ...Args>
-			Point(Args&&...);
-
-			template <typename U, std::size_t M>
-			Point(const Point<U,M>&);
-
+			Point(Args&&... args) : std::array<T,N>{{args...}}
+    	{
+    	}
+			
 			// ------------------------------- ACCESS --------------------------------
 			T&          x()                        { static_assert(N>0, "x() required N >= 1"); return operator[](0); }
 			const T&    x()                  const { static_assert(N>0, "x() required N >= 1"); return operator[](0); }
@@ -54,12 +57,10 @@ namespace adimx
 			T infnorm() const;
 
 			// ------------------------------- STATIC --------------------------------
+			template <typename U, std::size_t M>
+			static Point resize			(const Point<U,M>&);
 			static Point min        (const Point&, const Point&);
 			static Point max        (const Point&, const Point&);
-
-			// ------------------------- ALGEBRIC OPERATORS --------------------------
-			static Point cross      (const Point&, const Point&);
-			static T     determinant(const Point&, const Point&, const Point&);
 
 			// ------------------------------ OPERATOR -------------------------------
 			template <typename U> Point  operator+ (const Point<U,N>&) const;
