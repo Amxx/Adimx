@@ -24,17 +24,19 @@ adimx::Point<T,N>::Point(const Point<U,M>& p)
 }
 
 /******************************************************************************
- *                               M E T R I C S                                *
+ *                               M E T H O D S                                *
  ******************************************************************************/
 template <typename T, std::size_t N>
-T adimx::Point<T,N>::norm() const
+T
+adimx::Point<T,N>::norm() const
 {
 	static_assert(std::is_floating_point<T>::value, "Point::norm needs foating Point");
 	return std::sqrt(this->sqsum());
 }
 
 template <typename T, std::size_t N>
-T adimx::Point<T,N>::sum() const
+T
+adimx::Point<T,N>::sum() const
 {
 	T result = operator[](0);
 	for (size_t i=1; i<N; ++i) result += operator[](i);
@@ -42,7 +44,8 @@ T adimx::Point<T,N>::sum() const
 }
 
 template <typename T, std::size_t N>
-T adimx::Point<T,N>::prod() const
+T
+adimx::Point<T,N>::prod() const
 {
 	T result = operator[](0);
 	for (size_t i=1; i<N; ++i) result *= operator[](i);
@@ -50,7 +53,8 @@ T adimx::Point<T,N>::prod() const
 }
 
 template <typename T, std::size_t N>
-T adimx::Point<T,N>::sqsum() const
+T
+adimx::Point<T,N>::sqsum() const
 {
 	T result = operator[](0)*operator[](0);
 	for (size_t i=1; i<N; ++i) result += operator[](i)*operator[](i);
@@ -58,7 +62,8 @@ T adimx::Point<T,N>::sqsum() const
 }
 
 template <typename T, std::size_t N>
-T adimx::Point<T,N>::infnorm() const
+T
+adimx::Point<T,N>::infnorm() const
 {
 	T result = operator[](0);
 	for (size_t i=1; i<N; ++i) result = std::max(result, operator[](i));
@@ -69,7 +74,8 @@ T adimx::Point<T,N>::infnorm() const
  *                        S T A T I C   M E T H O D S                         *
  ******************************************************************************/
 template <typename T, std::size_t N>
-adimx::Point<T,N> adimx::Point<T,N>::min(const adimx::Point<T,N>& p1, const adimx::Point<T,N>& p2)
+adimx::Point<T,N>
+adimx::Point<T,N>::min(const adimx::Point<T,N>& p1, const adimx::Point<T,N>& p2)
 {
 	adimx::Point<T,N> p;
 	for (size_t i=0; i<N; ++i) p[i] = std::min(p1[i], p2[i]);
@@ -77,7 +83,8 @@ adimx::Point<T,N> adimx::Point<T,N>::min(const adimx::Point<T,N>& p1, const adim
 }
 
 template <typename T, std::size_t N>
-adimx::Point<T,N> adimx::Point<T,N>::max(const adimx::Point<T,N>& p1, const adimx::Point<T,N>& p2)
+adimx::Point<T,N>
+adimx::Point<T,N>::max(const adimx::Point<T,N>& p1, const adimx::Point<T,N>& p2)
 {
 	adimx::Point<T,N> p;
 	for (size_t i=0; i<N; ++i) p[i] = std::max(p1[i], p2[i]);
@@ -90,7 +97,8 @@ adimx::Point<T,N> adimx::Point<T,N>::max(const adimx::Point<T,N>& p1, const adim
 // operator+
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator+(const adimx::Point<U,N>& p) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator+(const adimx::Point<U,N>& p) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) + p[i];
@@ -98,7 +106,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator+(const adimx::Point<U,N>& p) const
 }
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator+(const U& f) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator+(const U& f) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) + f;
@@ -107,7 +116,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator+(const U& f) const
 // operator-
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator-(const adimx::Point<U,N>& p) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator-(const adimx::Point<U,N>& p) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) - p[i];
@@ -115,7 +125,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator-(const adimx::Point<U,N>& p) const
 }
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator-(const U& f) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator-(const U& f) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) - f;
@@ -124,7 +135,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator-(const U& f) const
 // operator*
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator*(const adimx::Point<U,N>& p) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator*(const adimx::Point<U,N>& p) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) * p[i];
@@ -132,7 +144,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator*(const adimx::Point<U,N>& p) const
 }
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator*(const U& f) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator*(const U& f) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) * f;
@@ -141,7 +154,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator*(const U& f) const
 // operator/
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator/(const adimx::Point<U,N>& p) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator/(const adimx::Point<U,N>& p) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) / p[i];
@@ -149,7 +163,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator/(const adimx::Point<U,N>& p) const
 }
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator/(const U& f) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator/(const U& f) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) / f;
@@ -158,7 +173,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator/(const U& f) const
 // operator%
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator%(const adimx::Point<U,N>& p) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator%(const adimx::Point<U,N>& p) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) % p[i];
@@ -166,7 +182,8 @@ adimx::Point<T,N> adimx::Point<T,N>::operator%(const adimx::Point<U,N>& p) const
 }
 template <typename T, std::size_t N>
 template <typename U>
-adimx::Point<T,N> adimx::Point<T,N>::operator%(const U& f) const
+adimx::Point<T,N>
+adimx::Point<T,N>::operator%(const U& f) const
 {
 	adimx::Point<T,N> r;
 	for (size_t i=0; i<N; ++i) r[i] = operator[](i) % f;

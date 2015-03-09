@@ -27,31 +27,33 @@ namespace adimx
 			template <typename U, std::size_t M>
 			Point(const Point<U,M>&);
 			
-			// ------------------------------- ACCESS --------------------------------
+			// ------------------------------- Access --------------------------------
 			T&          x()                        { static_assert(N>0, "x() required N >= 1"); return operator[](0); }
 			const T&    x()                  const { static_assert(N>0, "x() required N >= 1"); return operator[](0); }
 			T&          y()                        { static_assert(N>1, "y() required N >= 2"); return operator[](1); }
 			const T&    y()                  const { static_assert(N>1, "y() required N >= 2"); return operator[](1); }
 			T&          z()                        { static_assert(N>2, "z() required N >= 3"); return operator[](2); }
 			const T&    z()                  const { static_assert(N>2, "z() required N >= 3"); return operator[](2); }
+			T&          w()                        { static_assert(N>3, "w() required N >= 4"); return operator[](3); }
+			const T&    w()                  const { static_assert(N>3, "w() required N >= 4"); return operator[](3); }
 			T&          at(size_t i)               { return container::at(i);                                         }
 			const T&    at(size_t i)         const { return container::at(i);                                         }
 			T&          operator[](size_t i)       { return container::operator[](i);                                 }
 			const T&    operator[](size_t i) const { return container::operator[](i);                                 }
 			std::size_t getdim()             const { return N;                                                        }
 
-			// ------------------------------- METRICS -------------------------------
+			// ------------------------------- methods -------------------------------
 			T norm()    const;
 			T sum()     const;
 			T prod()    const;
 			T sqsum()   const;
 			T infnorm() const;
 
-			// ------------------------------- STATIC --------------------------------
+			// ------------------------------- Static --------------------------------
 			static Point min        (const Point&, const Point&);
 			static Point max        (const Point&, const Point&);
 
-			// ------------------------------ OPERATOR -------------------------------
+			// ------------------------------ Operators ------------------------------
 			template <typename U> Point  operator+ (const Point<U,N>&) const;
 			template <typename U> Point  operator+ (const U&         ) const;
 			template <typename U> Point  operator- (const Point<U,N>&) const;
