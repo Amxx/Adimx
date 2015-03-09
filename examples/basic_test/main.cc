@@ -52,10 +52,6 @@ int main()
 	std::cout << "std::accumulate 2 : " << std::accumulate(vec.begin(), vec.end(), vec.front()) << std::endl;
 
 
-
-
-	
-
 	adimx::Domain<float,3> domain( {{-0.75f, -0.75f, -0.75f}}, {{ +0.75f, +0.75f, +0.75f}} );
 	adimx::Domain<float,3> bounds( {{-0.75f, -0.75f, -0.75f}}, {{ +0.00f, +0.00f, +0.00f}} );
 	adimx::Point<size_t,3> size(10);
@@ -76,13 +72,17 @@ int main()
 	std::cout << "grid physOffset() : " << subgrid.physOffset() << std::endl;
 	std::cout << "grid gridOffset() : " << subgrid.gridOffset() << std::endl;
 
+
 	adimx::Field<float,float,3> field(grid);
-	std::cout << "field stride      : " << field.stride() << std::endl; 
-	std::cout << "field size        : " << field.size() << std::endl; 
+	std::cout << "field stride      : " << field.stride() << std::endl;
+	std::cout << "field size        : " << field.size() << std::endl;
+	std::cout << "field unit        : " << field.unit() << std::endl;
+
 
 	adimx::Field<float,float,3> pfield(grid, {{ 1, 1, 0, }});
-	std::cout << "pfield stride     : " << pfield.stride() << std::endl; 
-	std::cout << "pfield size       : " << pfield.size() << std::endl; 
+	std::cout << "pfield stride     : " << pfield.stride() << std::endl;
+	std::cout << "pfield size       : " << pfield.size() << std::endl;
+	std::cout << "field unit        : " << pfield.unit() << std::endl;
 
 
 	return 0;

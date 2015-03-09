@@ -44,10 +44,12 @@ namespace adimx
 			const Grid<T,D>& grid  () const { return _grid;             }
 			const gridPoint& stride() const { return _stride;           }
 			size_t           size  () const { return container::size(); }
+			T                unit  () const { return _unit;             }
 
 		private:
 			Grid<T,D> _grid;
 			gridPoint _stride;
+			T					_unit;
 	};
 }
 

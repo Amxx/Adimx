@@ -1,14 +1,17 @@
 /******************************************************************************
  *                          C O N S T R U C T O R S                           *
  ******************************************************************************/
-template<typename W, 	typename T, std::size_t D>
+template<typename W, typename T, std::size_t D>
 adimx::Field<W,T,D>::Field(const Grid<T,D>& grid, const gridPoint& axis) :
 	_grid(grid)
 {
+	_unit = T(1);
+
 	size_t size = 1;
 	for (size_t i=0; i<D; ++i)
 	{
 		_stride[i] = axis[i]?0:size;
+		_unit     *= axis[i]?1:_grid.step()[i];
 		size      *= axis[i]?1:_grid.size()[i];
 	}
 	container::resize(size);
